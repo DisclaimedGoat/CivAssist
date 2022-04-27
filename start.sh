@@ -1,0 +1,1 @@
+java -jar ./civassist/target/civassist-1.0-jar-with-dependencies.jar

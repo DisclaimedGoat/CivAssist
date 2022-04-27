@@ -1,0 +1,7 @@
+.idea/
+.vscode/
+/civassist/target
+
+!logs
+!*.log
+*.env
