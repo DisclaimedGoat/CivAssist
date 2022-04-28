@@ -50,12 +50,14 @@ public final class JoinCommand extends BaseCommand {
         if(EventUtils.isNull(event, sessionNameOption)) return;
         String sessionName = sessionNameOption.getAsString();
 
+        //If the sessionName doesn't exist
         SessionData sessionData = SessionData.getBySessionName(guild, sessionName);
         if(sessionData == null) {
             EventUtils.sendSilentReply(event, "🛑 Cannot find session in this server with session name as `" + sessionName + "`.");
             return;
         }
 
+        //If the user trying to join already the host
         if(sessionData.hostId.equals(member.getId())) {
             EventUtils.sendSilentReply(event, "🛑 You have already joined this session since you are the host silly!");
             return;
@@ -64,11 +66,25 @@ public final class JoinCommand extends BaseCommand {
         TextChannel channel = guild.getTextChannelById(sessionData.channelId);
         if(EventUtils.isNull(event, channel)) return;
 
+        //If the user is already in the session
         if(!sessionData.addJoinedUser(member.getId())) {
             EventUtils.sendSilentReply(event, "🛑 You have already joined this session! If you'd like to leave, do so with `/civjoin leave`.");
             return;
         }
 
+        //If the session is full
+        if(sessionData.getNumberPlayers() + 1 > sessionData.maxPlayers) {
+            EventUtils.sendSilentReply(event, "🛑 Unable to join session due to it being full.");
+            return;
+        }
+
+        //If the user isn't whitelisted OR is blacklisted
+        if(!sessionData.canAddUser(member.getId())) {
+            EventUtils.sendSilentReply(event, "🛑 Unable to join session due to lack of permission.");
+            return;
+        }
+
+        //Join the session
         ChannelUtils.addUserToChannel(channel, member);
         channel.sendMessage(String.format("%s has just joined this session. Playing as player: `%s`.",
                 MemberUtils.memberToMentionable(member),
