@@ -14,6 +14,7 @@ public class SessionData {
     public String sessionName;
     public ArrayList<String> joinedUsers = new ArrayList<>();
     public ArrayList<String> blacklistedUsers = new ArrayList<>();
+    public ArrayList<String> whitelistedUsers = new ArrayList<>();
     public int maxPlayers = 6;
 
     public String hostId;
@@ -139,25 +140,52 @@ public class SessionData {
     }
 
     public boolean addBlacklistedUser(String userId) {
-        if(joinedUsers.contains(userId)) return false;
+        if(blacklistedUsers.contains(userId)) return false;
         blacklistedUsers.add(userId);
 
-        setArrayFromList(joinedUsers, "blacklistedUsers");
+        setArrayFromList(blacklistedUsers, "blacklistedUsers");
 
         return true;
     }
 
     public boolean removeBlacklistedUser(String userId) {
-        if(!joinedUsers.contains(userId)) return false;
+        if(!blacklistedUsers.contains(userId)) return false;
         blacklistedUsers.remove(userId);
 
-        setArrayFromList(joinedUsers, "blacklistedUsers");
+        setArrayFromList(blacklistedUsers, "blacklistedUsers");
 
         return true;
+    }
+
+    public boolean addWhitelistedUser(String userId) {
+        if(whitelistedUsers.contains(userId)) return false;
+        whitelistedUsers.add(userId);
+
+        setArrayFromList(whitelistedUsers, "whitelistedUsers");
+
+        return true;
+    }
+
+    public boolean removeWhitelistedUser(String userId) {
+        if(!whitelistedUsers.contains(userId)) return false;
+        whitelistedUsers.remove(userId);
+
+        setArrayFromList(whitelistedUsers, "whitelistedUsers");
+
+        return true;
+    }
+
+    public boolean canAddUser(String userId) {
+        if(whitelistedUsers.size() > 0) return whitelistedUsers.contains(userId);
+        else return !blacklistedUsers.contains(userId);
     }
 
     public void setMaxPlayers(int maxPlayers) {
         setValue("maxPlayers", this.maxPlayers, maxPlayers);
         this.maxPlayers = maxPlayers;
+    }
+
+    public int getNumberPlayers() {
+        return joinedUsers.size();
     }
 }
