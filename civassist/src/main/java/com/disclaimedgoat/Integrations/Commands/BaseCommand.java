@@ -31,6 +31,7 @@ public abstract class BaseCommand {
         new DisbandCommand();
         new KickCommand();
         new RenameCommand();
+        new WhitelistCommand();
 
         //Joining commands
         new JoinCommand();
