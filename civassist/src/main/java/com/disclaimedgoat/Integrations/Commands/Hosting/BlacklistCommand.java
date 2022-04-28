@@ -9,7 +9,7 @@ import static net.azzerial.slash.annotations.OptionType.USER;
 
 @Slash.Tag("civblacklist")
 @Slash.Command(
-        name = "civblacklist", description = "Blacklists a user from a ever joining one of your sessions. Globally effects all of your sessions.",
+        name = "civblacklist", description = "Blacklists a user from a ever joining one of your sessions. Only affects current session channel.",
         subcommands = {
                 @Subcommand(name = "add", description = "Adds user(s) to a list to blacklist from your sessions",
                     options = {
