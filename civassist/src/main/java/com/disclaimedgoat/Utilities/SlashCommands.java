@@ -60,10 +60,13 @@ public class SlashCommands {
                 SlashCommand command = client.getCommand(commandName);
 
                 RestAction<?> restAction = command.updateGuildPrivileges(guild, privileges);
-                if(restAction == null)
-                    restAction = command.upsertGuild(guild).updateGuildPrivileges(guild, privileges);
+                if(restAction == null) continue;
+//                restAction.complete()
+//                restAction.queue(success -> {}, failure -> {
+//                    System.out.println("Action failure. Cause: " + failure.getMessage() + " " + commandName);
+//                });
+                restAction.queue(success -> {}, failure -> {});
 
-                restAction.queue();
             }
         }
     }
