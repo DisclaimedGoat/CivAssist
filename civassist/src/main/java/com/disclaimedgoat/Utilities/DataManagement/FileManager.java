@@ -14,8 +14,6 @@ public class FileManager {
         createDirectory(rootPath);
     }
 
-    public FileManager() { this("civassist/"); }
-
     public File getFile(String...filename) {
         return getFile(true, filename);
     }
