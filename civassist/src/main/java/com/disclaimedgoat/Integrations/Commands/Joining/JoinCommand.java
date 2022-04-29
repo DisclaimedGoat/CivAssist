@@ -3,6 +3,7 @@ package com.disclaimedgoat.Integrations.Commands.Joining;
 import com.disclaimedgoat.Integrations.Commands.BaseCommand;
 import com.disclaimedgoat.Integrations.Data.SessionData;
 import com.disclaimedgoat.Integrations.Data.UserData;
+import com.disclaimedgoat.Utilities.DataManagement.Logger;
 import com.disclaimedgoat.Utilities.Discord.ChannelUtils;
 import com.disclaimedgoat.Utilities.Discord.EventUtils;
 import com.disclaimedgoat.Utilities.Discord.MemberUtils;
@@ -91,6 +92,9 @@ public final class JoinCommand extends BaseCommand {
                 data.playerName)).queue();
 
         EventUtils.sendSilentReply(event, "✅ Successfully joined session " + sessionName + ". You are playing as " + data.playerName);
+
+        Logger.guildLog(guild, "User %s joined session '%s'. Remaining users: %d/%d",
+                member.getEffectiveName(), sessionData.sessionName, sessionData.getNumberPlayers(), sessionData.maxPlayers);
     }
 
     @Override

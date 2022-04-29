@@ -2,6 +2,7 @@ package com.disclaimedgoat.Utilities.Discord;
 
 import com.disclaimedgoat.Integrations.Commands.BaseCommand;
 import com.disclaimedgoat.Main;
+import com.disclaimedgoat.Utilities.DataManagement.Logger;
 import com.disclaimedgoat.Utilities.Discord.PermissionUtil;
 import net.azzerial.slash.SlashClient;
 import net.azzerial.slash.SlashClientBuilder;
@@ -51,24 +52,27 @@ public class SlashCommands {
     }
 
     public static void updatePrivileges() {
-        String[] commands = BaseCommand.getCommands();
         List<Guild> guilds = Main.getJda().getGuilds();
 
         for(Guild guild : guilds) {
-            for(String commandName : commands) {
-                CommandPrivilege[] privileges = PermissionUtil.getCommandPrivileges(guild, commandName);
+            updatePrivileges(guild);
+        }
+    }
 
-                SlashCommand command = client.getCommand(commandName);
+    public static void updatePrivileges(Guild guild) {
+        String[] commands = BaseCommand.getCommands();
 
-                RestAction<?> restAction = command.updateGuildPrivileges(guild, privileges);
-                if(restAction == null) continue;
-//                restAction.complete()
-//                restAction.queue(success -> {}, failure -> {
-//                    System.out.println("Action failure. Cause: " + failure.getMessage() + " " + commandName);
-//                });
-                restAction.queue(success -> {}, failure -> {});
+        Logger.guildLog(guild, "Updating slash command privileges");
 
-            }
+        for(String commandName : commands) {
+            CommandPrivilege[] privileges = PermissionUtil.getCommandPrivileges(guild, commandName);
+
+            SlashCommand command = client.getCommand(commandName);
+
+            RestAction<?> restAction = command.updateGuildPrivileges(guild, privileges);
+            if(restAction == null) continue;
+
+            restAction.queue(success -> {}, failure -> {});
         }
     }
 

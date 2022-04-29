@@ -2,6 +2,7 @@ package com.disclaimedgoat.Integrations.Commands.Hosting;
 
 import com.disclaimedgoat.Integrations.Data.SessionData;
 import com.disclaimedgoat.Main;
+import com.disclaimedgoat.Utilities.DataManagement.Logger;
 import com.disclaimedgoat.Utilities.Discord.ChannelUtils;
 import com.disclaimedgoat.Utilities.Discord.EventUtils;
 import com.disclaimedgoat.Utilities.Discord.PermissionUtil;
@@ -81,6 +82,8 @@ public final class KickCommand extends HostBaseCommand{
         sessionData.removeJoinedUser(primaryUser.getId());
         ChannelUtils.removeUserFromChannel(channel, guild.retrieveMember(primaryUser).complete());
 
+        logKick(guild, member, primaryUser, sessionData.sessionName);
+
         String message = member.getEffectiveName() + " kicked " + primaryUser.getName() + " from session.";
         String reply = "";
 
@@ -97,6 +100,8 @@ public final class KickCommand extends HostBaseCommand{
 
             sessionData.joinedUsers.remove(kickUser.getId());
             ChannelUtils.removeUserFromChannel(channel, guild.retrieveMember(kickUser).complete());
+
+            logKick(guild, member, kickUser, sessionData.sessionName);
 
             message += "\n" + member.getEffectiveName() + " kicked " + primaryUser.getName() + " from session.";
         }
@@ -116,5 +121,10 @@ public final class KickCommand extends HostBaseCommand{
         return guild.getOwnerId().equals(user.getId()) ||
                 hostId.equals(user.getId()) ||
                 user.getId().equals(Main.getJda().getSelfUser().getId());
+    }
+
+    private static void logKick(Guild guild, Member invoker, User user, String sessionName) {
+        Logger.guildLog(guild, "User %s kicked user %s from session %s",
+                invoker.getEffectiveName(), user.getName(), sessionName);
     }
 }

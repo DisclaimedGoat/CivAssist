@@ -1,6 +1,7 @@
 package com.disclaimedgoat.Integrations.Commands.Hosting;
 
 import com.disclaimedgoat.Integrations.Data.SessionData;
+import com.disclaimedgoat.Utilities.DataManagement.Logger;
 import com.disclaimedgoat.Utilities.Discord.ChannelUtils;
 import com.disclaimedgoat.Utilities.Discord.EventUtils;
 import com.disclaimedgoat.Utilities.Discord.PermissionUtil;
@@ -83,6 +84,8 @@ public final class DisbandCommand extends HostBaseCommand{
 
         guildChannel.delete().complete();
         SessionData.deleteSession(data);
+
+        Logger.guildLog(guild, "Disbanding session %s", sessionName);
     }
 
     @Override

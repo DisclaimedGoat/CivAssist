@@ -4,6 +4,7 @@ import com.disclaimedgoat.Integrations.Commands.BaseCommand;
 import com.disclaimedgoat.Integrations.Events.GuildEvents;
 import com.disclaimedgoat.Utilities.DataManagement.Database;
 import com.disclaimedgoat.Utilities.DataManagement.Environment;
+import com.disclaimedgoat.Utilities.DataManagement.Logger;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -22,6 +23,8 @@ public final class Main {
 
     public static void main(String[] args) {
         Environment.init();
+        Logger.init();
+
         TOKEN = Environment.getDiscordToken();
 
         Database.init();
@@ -34,12 +37,14 @@ public final class Main {
 
     private static void setupJDA() {
         try {
-
+            Logger.globalLog("jda", "Building JDA");
             jda = JDABuilder.createLight(TOKEN).build().awaitReady();
+            Logger.globalLog("jda", "JDA Successfully built");
 
             jda.getPresence().setActivity(Activity.listening("/civhelp 💖"));
+
         } catch (Exception e) {
-            System.out.println("Oops\n" + e.getMessage());
+            Logger.globalErr("jda", "Error occurred when building JDA", e.getMessage());
         }
     }
 

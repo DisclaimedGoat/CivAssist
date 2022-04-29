@@ -2,6 +2,7 @@ package com.disclaimedgoat.Integrations.Commands.Hosting;
 
 import com.disclaimedgoat.Integrations.Data.SessionData;
 import com.disclaimedgoat.Integrations.Data.UserData;
+import com.disclaimedgoat.Utilities.DataManagement.Logger;
 import com.disclaimedgoat.Utilities.Discord.ChannelUtils;
 import com.disclaimedgoat.Utilities.Discord.EventUtils;
 import com.disclaimedgoat.Utilities.Discord.GuildUtils;
@@ -88,12 +89,17 @@ public final class CreateCommand extends HostBaseCommand{
         //Push the new session to the database
         if(!SessionData.pushNew(data)) {
             EventUtils.sendSilentReply(event, "🛑 Unable to push new session data to database. Please let server staff know!");
+
+            Logger.guildErr(guild, "Unable to push session! %s", sessionName);
+
             return;
         }
 
         //Send a success message in the new channel and a silent reply to the command issuer.
         channel.sendMessage("A new Civilization 6 Play by Cloud session has been created! Tell your friends to join with `/civjoin join`!").queue();
         EventUtils.sendSilentReply(event, "✅ Successfully created new session!");
+
+        Logger.guildLog(guild, "Session %s created by user %s", sessionName, member.getEffectiveName());
     }
 
     @Override

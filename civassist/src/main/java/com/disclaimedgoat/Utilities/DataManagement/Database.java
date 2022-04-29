@@ -57,6 +57,8 @@ public class Database {
         if(isServerInCollection(id))
             return;
 
+        databaseLog("Creating new database for guild " + guild.getId());
+
         serversDatabase.createCollection(id);
     }
 
@@ -79,6 +81,8 @@ public class Database {
     }
 
     public static <T> void deleteOneDocument(Guild guild, String fieldName, T value) {
+        databaseLog("Deleting document with (" + fieldName + ", " + value + ") value");
+
         getCollectionFromGuild(guild).deleteOne(eq(fieldName, value));
     }
 
@@ -91,11 +95,15 @@ public class Database {
     }
 
     public static void pushUser(UserData user, boolean create) {
+        databaseLog("Pushing user " + user.userId + " to database");
+
         if(create) basicUserCollection.insertOne(new Document(ClassUtils.mapClass(user)));
         else basicUserCollection.replaceOne(eq("userId", user.userId), new Document(ClassUtils.mapClass(user)));
     }
 
     public static Document getUser(String userId) {
+        databaseLog("Getting user from database: " + userId);
+
         return basicUserCollection.find(eq("userId", userId)).first();
     }
 
@@ -113,5 +121,9 @@ public class Database {
 
     public interface DocumentIterator {
         void iterate(Document doc);
+    }
+
+    private static void databaseLog(String...content) {
+        Logger.globalLog("database", content);
     }
 }

@@ -2,6 +2,7 @@ package com.disclaimedgoat.Integrations.Commands.Joining;
 
 import com.disclaimedgoat.Integrations.Commands.BaseCommand;
 import com.disclaimedgoat.Integrations.Data.SessionData;
+import com.disclaimedgoat.Utilities.DataManagement.Logger;
 import com.disclaimedgoat.Utilities.Discord.ChannelUtils;
 import com.disclaimedgoat.Utilities.Discord.EventUtils;
 import com.disclaimedgoat.Utilities.Discord.MemberUtils;
@@ -46,6 +47,9 @@ public final class LeaveCommand extends BaseCommand {
                 MemberUtils.memberToMentionable(member))).queue();
 
         EventUtils.sendSilentReply(event, "✅ Successfully left session `" + sessionData.sessionName + "`");
+
+        Logger.guildLog(guild, "User %s left session '%s'. Remaining users: %d/%d",
+                member.getEffectiveName(), sessionData.sessionName, sessionData.getNumberPlayers(), sessionData.maxPlayers);
     }
 
     @Override

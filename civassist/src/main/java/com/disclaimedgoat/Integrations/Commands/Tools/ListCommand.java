@@ -4,6 +4,7 @@ import com.disclaimedgoat.Integrations.Commands.BaseCommand;
 import com.disclaimedgoat.Integrations.Data.SessionData;
 import com.disclaimedgoat.Integrations.Data.UserData;
 import com.disclaimedgoat.Utilities.DataManagement.Database;
+import com.disclaimedgoat.Utilities.DataManagement.Logger;
 import com.disclaimedgoat.Utilities.Discord.EmbedUtils;
 import com.disclaimedgoat.Utilities.Discord.EventUtils;
 import com.disclaimedgoat.Utilities.Discord.MemberUtils;
@@ -116,6 +117,8 @@ public final class ListCommand extends BaseCommand {
         //Get the build embed, depending on the criteria above, and send it back to the issuer.
         EmbedUtils.appendFooterBar(embed);
         event.replyEmbeds(embed.build()).setEphemeral(true).complete();
+
+        Logger.guildLog(guild, "Created and sent list to user %s", member.getEffectiveName());
     }
 
     @Override

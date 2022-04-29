@@ -3,6 +3,7 @@ package com.disclaimedgoat.Utilities.Discord;
 import com.disclaimedgoat.Integrations.Commands.BaseCommand;
 import com.disclaimedgoat.Integrations.Data.SessionData;
 import com.disclaimedgoat.Main;
+import com.disclaimedgoat.Utilities.DataManagement.Logger;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
@@ -18,12 +19,25 @@ public class PermissionUtil {
     //If the bot cannot interact with this person's roles, then they can host
     public static boolean canHost(Guild guild, Member member) {
         Member bot = guild.getMember(Main.getJda().getSelfUser());
-        return !bot.canInteract(member);
+        boolean canHost =!bot.canInteract(member);
+
+        if(!canHost)
+            Logger.guildWarn(guild,
+                    member.getEffectiveName() + " tried to use host command. Need to revaluate permissions!");
+
+        return canHost;
     }
 
     //If the user, member, is absolute power of the server or if the member's id is equal to the host's id
     public static boolean canModifyHost(Guild guild, Member member, SessionData sessionData) {
-        return sessionData.hostId.equals(member.getId()) || hasAbsolute(guild, member);
+        boolean canModifyHost = sessionData.hostId.equals(member.getId()) || hasAbsolute(guild, member);
+
+        if(!canModifyHost) {
+            Logger.guildWarn(guild,
+                    member.getEffectiveName() + " tried to use host command. Need to revaluate permissions!");
+        }
+
+        return canModifyHost;
     }
 
     //Returns true if member is the owner of the guild

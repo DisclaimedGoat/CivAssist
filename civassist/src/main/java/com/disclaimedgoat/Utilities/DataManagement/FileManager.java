@@ -22,8 +22,9 @@ public class FileManager {
         String filepath = composeFilePath(filename);
         File file = new File(filepath);
 
-        if(create) {
+        if(create && !file.exists()) {
             try {
+                System.out.println("Creating new file");
                 file.createNewFile();
             } catch (IOException ignored) { }
         }
@@ -47,10 +48,9 @@ public class FileManager {
     }
 
     public static boolean printToFile(File file, String...content) {
-        try(PrintWriter writer = new PrintWriter(new FileWriter(file))) {
+        try(PrintWriter writer = new PrintWriter(new FileWriter(file, true))) {
 
-            for(String s : content)
-                writer.println(s);
+            for(String s : content) writer.println(s);
 
         } catch (IOException e) {
             return false;

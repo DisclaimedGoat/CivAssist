@@ -2,6 +2,7 @@ package com.disclaimedgoat.Integrations.Commands.Tools;
 
 import com.disclaimedgoat.Integrations.Commands.BaseCommand;
 import com.disclaimedgoat.Integrations.Data.UserData;
+import com.disclaimedgoat.Utilities.DataManagement.Logger;
 import com.disclaimedgoat.Utilities.Discord.EventUtils;
 import net.azzerial.slash.annotations.Option;
 import net.azzerial.slash.annotations.Slash;
@@ -39,6 +40,9 @@ public final class RegisterCommand extends BaseCommand {
         data.setValue("playerName", playerName);
 
         EventUtils.sendSilentReply(event, "Successfully registered your game name as `" + playerName + "`");
+
+        Logger.globalLog("registry", "User %s registered civ6 name to '%s'",
+                event.getUser().getName(), playerName);
     }
 
     @Override

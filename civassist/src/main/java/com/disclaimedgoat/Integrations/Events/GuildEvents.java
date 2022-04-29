@@ -1,6 +1,7 @@
 package com.disclaimedgoat.Integrations.Events;
 
 import com.disclaimedgoat.Utilities.DataManagement.Database;
+import com.disclaimedgoat.Utilities.DataManagement.Logger;
 import com.disclaimedgoat.Utilities.Discord.SlashCommands;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
@@ -14,5 +15,7 @@ public class GuildEvents extends ListenerAdapter {
 
         Database.addServer(guild);
         SlashCommands.addGuild(guild);
+
+        Logger.globalLog("events", "New guild join event: " + guild.getId());
     }
 }

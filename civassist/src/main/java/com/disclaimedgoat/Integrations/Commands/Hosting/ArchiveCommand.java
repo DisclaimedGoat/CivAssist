@@ -1,6 +1,7 @@
 package com.disclaimedgoat.Integrations.Commands.Hosting;
 
 import com.disclaimedgoat.Integrations.Data.SessionData;
+import com.disclaimedgoat.Utilities.DataManagement.Logger;
 import com.disclaimedgoat.Utilities.Discord.ChannelUtils;
 import com.disclaimedgoat.Utilities.Discord.EventUtils;
 import com.disclaimedgoat.Utilities.Discord.PermissionUtil;
@@ -70,6 +71,8 @@ public final class ArchiveCommand extends HostBaseCommand {
         EventUtils.sendSilentReply(event, "✅ Successfully archived channel and deleted session!");
 
         SessionData.deleteSession(sessionData);
+
+        Logger.guildLog(guild, "Archiving session %s", sessionName);
     }
 
     @Override
