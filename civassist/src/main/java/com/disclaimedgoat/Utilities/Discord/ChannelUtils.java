@@ -1,4 +1,4 @@
-package com.disclaimedgoat.Utilities;
+package com.disclaimedgoat.Utilities.Discord;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;

@@ -1,8 +1,8 @@
 package com.disclaimedgoat.Integrations.Commands.Hosting;
 
 import com.disclaimedgoat.Integrations.Commands.BaseCommand;
-import com.disclaimedgoat.Utilities.EventUtils;
-import com.disclaimedgoat.Utilities.PermissionUtil;
+import com.disclaimedgoat.Utilities.Discord.EventUtils;
+import com.disclaimedgoat.Utilities.Discord.PermissionUtil;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;

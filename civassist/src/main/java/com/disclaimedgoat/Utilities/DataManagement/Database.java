@@ -1,6 +1,7 @@
-package com.disclaimedgoat.Utilities;
+package com.disclaimedgoat.Utilities.DataManagement;
 
 import com.disclaimedgoat.Integrations.Data.UserData;
+import com.disclaimedgoat.Utilities.Misc.ClassUtils;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.*;

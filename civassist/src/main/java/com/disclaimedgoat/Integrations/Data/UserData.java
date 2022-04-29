@@ -1,11 +1,9 @@
 package com.disclaimedgoat.Integrations.Data;
 
-import com.disclaimedgoat.Utilities.Database;
-import net.dv8tion.jda.api.entities.Guild;
+import com.disclaimedgoat.Utilities.DataManagement.Database;
 import org.bson.Document;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
 
 public class UserData {
 

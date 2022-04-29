@@ -2,9 +2,9 @@ package com.disclaimedgoat.Integrations.Commands.Joining;
 
 import com.disclaimedgoat.Integrations.Commands.BaseCommand;
 import com.disclaimedgoat.Integrations.Data.SessionData;
-import com.disclaimedgoat.Utilities.ChannelUtils;
-import com.disclaimedgoat.Utilities.EventUtils;
-import com.disclaimedgoat.Utilities.MemberUtils;
+import com.disclaimedgoat.Utilities.Discord.ChannelUtils;
+import com.disclaimedgoat.Utilities.Discord.EventUtils;
+import com.disclaimedgoat.Utilities.Discord.MemberUtils;
 import net.azzerial.slash.annotations.Slash;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;

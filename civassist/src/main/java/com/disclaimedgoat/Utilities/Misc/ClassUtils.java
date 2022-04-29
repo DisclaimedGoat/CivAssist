@@ -1,4 +1,4 @@
-package com.disclaimedgoat.Utilities;
+package com.disclaimedgoat.Utilities.Misc;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;

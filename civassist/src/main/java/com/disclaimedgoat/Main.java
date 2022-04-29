@@ -2,14 +2,11 @@ package com.disclaimedgoat;
 
 import com.disclaimedgoat.Integrations.Commands.BaseCommand;
 import com.disclaimedgoat.Integrations.Events.GuildEvents;
-import com.disclaimedgoat.Utilities.Database;
-import com.disclaimedgoat.Utilities.Environment;
+import com.disclaimedgoat.Utilities.DataManagement.Database;
+import com.disclaimedgoat.Utilities.DataManagement.Environment;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
-
-import java.io.File;
-import java.io.IOException;
 
 public final class Main {
 

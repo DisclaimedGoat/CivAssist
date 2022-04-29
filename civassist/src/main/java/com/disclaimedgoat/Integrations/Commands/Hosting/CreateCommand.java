@@ -2,9 +2,9 @@ package com.disclaimedgoat.Integrations.Commands.Hosting;
 
 import com.disclaimedgoat.Integrations.Data.SessionData;
 import com.disclaimedgoat.Integrations.Data.UserData;
-import com.disclaimedgoat.Utilities.ChannelUtils;
-import com.disclaimedgoat.Utilities.EventUtils;
-import com.disclaimedgoat.Utilities.GuildUtils;
+import com.disclaimedgoat.Utilities.Discord.ChannelUtils;
+import com.disclaimedgoat.Utilities.Discord.EventUtils;
+import com.disclaimedgoat.Utilities.Discord.GuildUtils;
 import net.azzerial.slash.annotations.Option;
 import net.azzerial.slash.annotations.OptionType;
 import net.azzerial.slash.annotations.Slash;

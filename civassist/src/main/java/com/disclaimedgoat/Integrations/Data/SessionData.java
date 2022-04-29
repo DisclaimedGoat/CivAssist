@@ -1,6 +1,6 @@
 package com.disclaimedgoat.Integrations.Data;
 
-import com.disclaimedgoat.Utilities.Database;
+import com.disclaimedgoat.Utilities.DataManagement.Database;
 import net.dv8tion.jda.api.entities.Guild;
 import org.bson.Document;
 import org.jetbrains.annotations.Nullable;

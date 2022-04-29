@@ -1,4 +1,4 @@
-package com.disclaimedgoat.Utilities;
+package com.disclaimedgoat.Utilities.Discord;
 
 import com.disclaimedgoat.Integrations.Commands.BaseCommand;
 import com.disclaimedgoat.Integrations.Data.SessionData;

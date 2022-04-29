@@ -1,4 +1,4 @@
-package com.disclaimedgoat.Utilities;
+package com.disclaimedgoat.Utilities.Discord;
 
 import com.disclaimedgoat.Constants;
 import com.disclaimedgoat.Main;

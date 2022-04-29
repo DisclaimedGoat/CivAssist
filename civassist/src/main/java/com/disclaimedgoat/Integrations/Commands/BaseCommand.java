@@ -8,7 +8,7 @@ import com.disclaimedgoat.Integrations.Commands.Tools.ListCommand;
 import com.disclaimedgoat.Integrations.Commands.Tools.ReadmeCommand;
 import com.disclaimedgoat.Integrations.Commands.Tools.RegisterCommand;
 import com.disclaimedgoat.Main;
-import com.disclaimedgoat.Utilities.SlashCommands;
+import com.disclaimedgoat.Utilities.Discord.SlashCommands;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 
 import java.util.HashMap;

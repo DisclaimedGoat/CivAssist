@@ -1,7 +1,8 @@
-package com.disclaimedgoat.Utilities;
+package com.disclaimedgoat.Utilities.Discord;
 
 import com.disclaimedgoat.Integrations.Commands.BaseCommand;
 import com.disclaimedgoat.Main;
+import com.disclaimedgoat.Utilities.Discord.PermissionUtil;
 import net.azzerial.slash.SlashClient;
 import net.azzerial.slash.SlashClientBuilder;
 import net.azzerial.slash.SlashCommand;

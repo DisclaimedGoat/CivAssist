@@ -1,4 +1,4 @@
-package com.disclaimedgoat.Utilities;
+package com.disclaimedgoat.Utilities.Network;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

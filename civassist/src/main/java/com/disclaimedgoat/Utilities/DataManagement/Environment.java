@@ -1,4 +1,4 @@
-package com.disclaimedgoat.Utilities;
+package com.disclaimedgoat.Utilities.DataManagement;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
