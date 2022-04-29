@@ -1,7 +1,6 @@
 package com.disclaimedgoat.Utilities.DataManagement;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -11,15 +10,17 @@ public class FileManager {
 
     public FileManager(String rootPath) {
         this.rootPath = Paths.get(rootPath);
+
+        createDirectory(rootPath);
     }
 
-    public FileManager() { rootPath = Paths.get("civassist/"); }
+    public FileManager() { this("civassist/"); }
 
-    public File getFile(String filename) {
-        return getFile(filename, true);
+    public File getFile(String...filename) {
+        return getFile(true, filename);
     }
 
-    public File getFile(String filename, boolean create) {
+    public File getFile(boolean create, String...filename) {
         String filepath = composeFilePath(filename);
         File file = new File(filepath);
 
@@ -45,6 +46,31 @@ public class FileManager {
 
     public boolean createDirectory(String name) {
         return createDirectory("", name);
+    }
+
+    public static boolean printToFile(File file, String...content) {
+        try(PrintWriter writer = new PrintWriter(new FileWriter(file))) {
+
+            for(String s : content)
+                writer.println(s);
+
+        } catch (IOException e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean printFormatted(File file, String format, Object...content) {
+        try(PrintWriter writer = new PrintWriter(new FileWriter(file))) {
+
+            writer.printf(format, content);
+
+        } catch (IOException e) {
+            return false;
+        }
+
+        return true;
     }
 
 }
