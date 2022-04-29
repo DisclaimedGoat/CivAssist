@@ -118,7 +118,7 @@ public final class ListCommand extends BaseCommand {
         EmbedUtils.appendFooterBar(embed);
         event.replyEmbeds(embed.build()).setEphemeral(true).complete();
 
-        Logger.guildLog(guild, "Created and sent list to user %s", member.getEffectiveName());
+        Logger.guildLogF(guild, "Created and sent list to user %s", member.getEffectiveName());
     }
 
     @Override

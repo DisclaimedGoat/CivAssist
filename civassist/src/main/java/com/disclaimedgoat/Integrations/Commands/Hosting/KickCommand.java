@@ -124,7 +124,7 @@ public final class KickCommand extends HostBaseCommand{
     }
 
     private static void logKick(Guild guild, Member invoker, User user, String sessionName) {
-        Logger.guildLog(guild, "User %s kicked user %s from session %s",
+        Logger.guildLogF(guild, "User %s kicked user %s from session %s",
                 invoker.getEffectiveName(), user.getName(), sessionName);
     }
 }

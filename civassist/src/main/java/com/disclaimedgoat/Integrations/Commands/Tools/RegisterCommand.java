@@ -41,7 +41,7 @@ public final class RegisterCommand extends BaseCommand {
 
         EventUtils.sendSilentReply(event, "Successfully registered your game name as `" + playerName + "`");
 
-        Logger.globalLog("registry", "User %s registered civ6 name to '%s'",
+        Logger.globalLogF("registry", "User %s registered civ6 name to '%s'",
                 event.getUser().getName(), playerName);
     }
 

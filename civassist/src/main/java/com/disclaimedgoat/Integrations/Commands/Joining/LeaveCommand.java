@@ -48,7 +48,7 @@ public final class LeaveCommand extends BaseCommand {
 
         EventUtils.sendSilentReply(event, "✅ Successfully left session `" + sessionData.sessionName + "`");
 
-        Logger.guildLog(guild, "User %s left session '%s'. Remaining users: %d/%d",
+        Logger.guildLogF(guild, "User %s left session '%s'. Remaining users: %d/%d",
                 member.getEffectiveName(), sessionData.sessionName, sessionData.getNumberPlayers(), sessionData.maxPlayers);
     }
 

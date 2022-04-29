@@ -99,7 +99,7 @@ public final class CreateCommand extends HostBaseCommand{
         channel.sendMessage("A new Civilization 6 Play by Cloud session has been created! Tell your friends to join with `/civjoin join`!").queue();
         EventUtils.sendSilentReply(event, "✅ Successfully created new session!");
 
-        Logger.guildLog(guild, "Session %s created by user %s", sessionName, member.getEffectiveName());
+        Logger.guildLogF(guild, "Session %s created by user %s", sessionName, member.getEffectiveName());
     }
 
     @Override

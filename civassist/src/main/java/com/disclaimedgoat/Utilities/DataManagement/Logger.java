@@ -62,20 +62,20 @@ public abstract class Logger {
     public static void guildTest(Guild guild, String... messages) { guildWrite(guild, LogLevel.DEBUG, messages); }
     public static void guildWarn(Guild guild, String... messages) { guildWrite(guild, LogLevel.WARNING, messages); }
 
-    public static void guildLog(Guild guild, String message, Object...content) { guildWrite(guild, LogLevel.REGULAR, String.format(message, content)); }
-    public static void guildErr(Guild guild, String message, Object...content) { guildWrite(guild, LogLevel.CRITICAL, String.format(message, content)); }
-    public static void guildTest(Guild guild, String message, Object...content) { guildWrite(guild, LogLevel.DEBUG, String.format(message, content)); }
-    public static void guildWarn(Guild guild, String message, Object...content) { guildWrite(guild, LogLevel.WARNING, String.format(message, content)); }
+    public static void guildLogF(Guild guild, String message, Object...content) { guildWrite(guild, LogLevel.REGULAR, String.format(message, content)); }
+    public static void guildErrF(Guild guild, String message, Object...content) { guildWrite(guild, LogLevel.CRITICAL, String.format(message, content)); }
+    public static void guildTestF(Guild guild, String message, Object...content) { guildWrite(guild, LogLevel.DEBUG, String.format(message, content)); }
+    public static void guildWarnF(Guild guild, String message, Object...content) { guildWrite(guild, LogLevel.WARNING, String.format(message, content)); }
 
     public static void globalLog(String filename, String... messages) { globalWrite(filename, LogLevel.REGULAR, messages); }
     public static void globalErr(String filename, String... messages) { globalWrite(filename, LogLevel.CRITICAL, messages); }
     public static void globalTest(String filename, String... messages) { globalWrite(filename, LogLevel.DEBUG, messages); }
     public static void globalWarn(String filename, String... messages) { globalWrite(filename, LogLevel.WARNING, messages); }
 
-    public static void globalLog(String filename, String message, Object...content) { globalWrite(filename, LogLevel.REGULAR, String.format(message, content)); }
-    public static void globalErr(String filename, String message, Object...content) { globalWrite(filename, LogLevel.CRITICAL, String.format(message, content)); }
-    public static void globalTest(String filename, String message, Object...content) { globalWrite(filename, LogLevel.DEBUG, String.format(message, content)); }
-    public static void globalWarn(String filename, String message, Object...content) { globalWrite(filename, LogLevel.WARNING, String.format(message, content)); }
+    public static void globalLogF(String filename, String message, Object...content) { globalWrite(filename, LogLevel.REGULAR, String.format(message, content)); }
+    public static void globalErrF(String filename, String message, Object...content) { globalWrite(filename, LogLevel.CRITICAL, String.format(message, content)); }
+    public static void globalTestF(String filename, String message, Object...content) { globalWrite(filename, LogLevel.DEBUG, String.format(message, content)); }
+    public static void globalWarnF(String filename, String message, Object...content) { globalWrite(filename, LogLevel.WARNING, String.format(message, content)); }
 
     private static String ext(String filename) { return filename + "." + logExtension; }
 

@@ -93,7 +93,7 @@ public final class JoinCommand extends BaseCommand {
 
         EventUtils.sendSilentReply(event, "✅ Successfully joined session " + sessionName + ". You are playing as " + data.playerName);
 
-        Logger.guildLog(guild, "User %s joined session '%s'. Remaining users: %d/%d",
+        Logger.guildLogF(guild, "User %s joined session '%s'. Remaining users: %d/%d",
                 member.getEffectiveName(), sessionData.sessionName, sessionData.getNumberPlayers(), sessionData.maxPlayers);
     }
 
