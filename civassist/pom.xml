@@ -83,14 +83,13 @@
             </plugin>
         </plugins>
 
-        <!-- <resources>
+        <resources>
             <resource>
-                <directory>src/main/resources</directory>
-                <targetPath>${project.build.directory}</targetPath>
+                <directory>../</directory>
                 <includes>
-                    <include>log4j2.properties</include>
+                    <include>.env</include>
                 </includes>
             </resource>
-        </resources> -->
+        </resources>
     </build>
 </project>
