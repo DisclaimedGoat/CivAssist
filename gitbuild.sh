@@ -12,7 +12,7 @@ echo "-- Finished git pull --"
 echo "============================"
 echo "BUILDING LASTEST MAVEN BUILD"
 echo "============================"
-mvn package -f ./club/pom.xml
+mvn package -f ./civassist/pom.xml
 echo "-- Finished maven build --"
 
 echo "============"
