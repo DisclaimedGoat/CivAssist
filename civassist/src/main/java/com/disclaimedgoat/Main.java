@@ -5,9 +5,14 @@ import com.disclaimedgoat.Integrations.Events.GuildEvents;
 import com.disclaimedgoat.Utilities.DataManagement.Database;
 import com.disclaimedgoat.Utilities.DataManagement.Environment;
 import com.disclaimedgoat.Utilities.DataManagement.Logger;
+import com.disclaimedgoat.Utilities.Network.CivListener;
+import com.disclaimedgoat.Utilities.Network.HTTP;
+import com.disclaimedgoat.Utilities.Network.ServerListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+
+import java.io.IOException;
 
 public final class Main {
 
@@ -20,19 +25,25 @@ public final class Main {
 
     private static JDA jda = null;
     public static JDA getJda() { return jda; }
+    private static ServerListener serverListener;
 
     public static void main(String[] args) {
         Environment.init();
         Logger.init();
-
-        TOKEN = Environment.getDiscordToken();
-
         Database.init();
 
+        TOKEN = Environment.getDiscordToken();
         setupJDA();
 
         BaseCommand.init();
         setupListeners();
+
+        //Setup the listening part of the server
+        serverListener = new ServerListener(8080, new CivListener());
+        serverListener.start();
+
+//        try { System.out.println(HTTP.makeRequest("http://localhost:8080")); }
+//        catch(IOException ignored) { }
     }
 
     private static void setupJDA() {

@@ -21,6 +21,14 @@ public class EmbedUtils {
         return embed;
     }
 
+    public static EmbedBuilder buildClassic() {
+        EmbedBuilder embed = new EmbedBuilder();
+        embed.setColor(Constants.BOT_COLOR);
+        embed.setFooter("made and sent with love 💖", Main.getJda().getSelfUser().getAvatarUrl());
+
+        return embed;
+    }
+
     public static void appendFooterBar(EmbedBuilder embed) {
         embed.appendDescription("\n----------------------------------------------------");
     }

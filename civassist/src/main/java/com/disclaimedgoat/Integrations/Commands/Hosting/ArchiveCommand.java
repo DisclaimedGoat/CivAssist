@@ -72,7 +72,7 @@ public final class ArchiveCommand extends HostBaseCommand {
 
         SessionData.deleteSession(sessionData);
 
-        Logger.guildLogF(guild, "Archiving session %s", sessionName);
+        Logger.guildLogF(guild, "%s called to disband session '%s'", member.getEffectiveName(), sessionName);
     }
 
     @Override

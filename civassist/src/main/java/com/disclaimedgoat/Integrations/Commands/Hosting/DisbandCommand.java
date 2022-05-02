@@ -85,7 +85,7 @@ public final class DisbandCommand extends HostBaseCommand{
         guildChannel.delete().complete();
         SessionData.deleteSession(data);
 
-        Logger.guildLogF(guild, "Disbanding session %s", sessionName);
+        Logger.guildLogF(guild, "%s called to disband session '%s'", member.getEffectiveName(), sessionName);
     }
 
     @Override

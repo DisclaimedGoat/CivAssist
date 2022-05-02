@@ -11,7 +11,7 @@ public class FileManager {
     public FileManager(String rootPath) {
         this.rootPath = Paths.get(rootPath);
 
-        createDirectory(rootPath);
+        createDirectory(this.rootPath.toAbsolutePath().toString());
     }
 
     public File getFile(String...filename) {
@@ -47,6 +47,15 @@ public class FileManager {
         return createDirectory("", name);
     }
 
+    public File[] getChildrenAtRoot() { return getChildrenAtDir(""); }
+
+    public File[] getChildrenAtDir(String filepath) {
+        File dir = new File(rootPath.toString());
+        if(!dir.exists() || !dir.isDirectory()) return null;
+
+        return dir.listFiles();
+    }
+
     public static boolean printToFile(File file, String...content) {
         try(PrintWriter writer = new PrintWriter(new FileWriter(file, true))) {
 
@@ -70,5 +79,4 @@ public class FileManager {
 
         return true;
     }
-
 }

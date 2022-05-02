@@ -1,0 +1,26 @@
+# This line is a comment
+# Because the name of this file doesn't START with "page", it will be ignored by the
+# readme parser
+
+# To create a title for the embed,
+title: Hello World!
+
+# To create lines for the description,
+desc: Here is the top of the line!
+desc: And here is another line
+desc: And another.
+
+# The previous title will be overwritten with this new title
+title: No, Good bye World!
+
+#To create a field,
+ftitle: This is the field title
+
+# And add a description to the field
+fdesc: This will be added to the field
+fdesc: As will this.
+
+# When another field title is set, the previous field data will be added
+ftitle: Another field title
+fdesc: Give this field some body.
+fdesc: Another line, because why not.

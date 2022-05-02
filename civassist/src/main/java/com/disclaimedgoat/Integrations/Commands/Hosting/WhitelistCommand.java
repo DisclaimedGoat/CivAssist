@@ -61,6 +61,8 @@ public final class WhitelistCommand extends HostBaseCommand{
         //Checks if can use the host command
         if(isIllegalHosting(event)) return;
 
+        
+
     }
 
     @Slash.Handler("remove") //Executes for the add subcommand
