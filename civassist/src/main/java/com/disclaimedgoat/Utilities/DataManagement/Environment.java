@@ -12,6 +12,8 @@ public final class Environment {
 
     private static String logRootPath = "";
 
+    private static int serverPort = 0;
+
 
     public static String getDiscordToken() {
         return discordToken;
@@ -29,6 +31,8 @@ public final class Environment {
         return logRootPath;
     }
 
+    public static int getServerPort() { return serverPort; }
+
     public static void init() {
         discordToken = env.get("DISCORD_TOKEN");
 
@@ -36,5 +40,7 @@ public final class Environment {
         mongoDBPassword = env.get("MONGODB_PASSWORD");
 
         logRootPath = env.get("LOG_ROOT_PATH");
+
+        serverPort = Integer.parseInt(env.get("PORT"));
     }
 }

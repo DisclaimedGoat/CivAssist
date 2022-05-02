@@ -39,7 +39,7 @@ public final class Main {
         setupListeners();
 
         //Setup the listening part of the server
-        serverListener = new ServerListener(8080, new CivListener());
+        serverListener = new ServerListener(Environment.getServerPort(), new CivListener());
         serverListener.start();
 
 //        try { System.out.println(HTTP.makeRequest("http://localhost:8080")); }
