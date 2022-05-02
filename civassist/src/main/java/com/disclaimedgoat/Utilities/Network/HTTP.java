@@ -13,25 +13,23 @@ import com.google.gson.JsonParser;
 
 public final class HTTP {
 
-    public static JsonObject makeJsonRequest(String endpoint) throws IOException, FileNotFoundException {
+    public static String makeRequest(String endpoint) throws IOException {
 
         URL url = new URL(endpoint);
 
         HttpURLConnection http = (HttpURLConnection) url.openConnection();
-        http.setRequestMethod("GET");
 
         BufferedReader in = new BufferedReader(
             new InputStreamReader(http.getInputStream()));
         String inputLine;
-        StringBuffer content = new StringBuffer();
+        StringBuilder content = new StringBuilder();
         while ((inputLine = in.readLine()) != null) {
             content.append(inputLine);
         }
         in.close();
 
         http.disconnect();
-
-        return JsonParser.parseString(content.toString()).getAsJsonObject();
+        return content.toString();
     }
 
     public static boolean checkURL(String url) {
