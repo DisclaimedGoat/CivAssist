@@ -12,5 +12,6 @@ public class CivListener implements ServerAction {
         System.out.println("Getting a call");
 
         in.lines().forEach(System.out::println);
+        out.write("request received!");
     }
 }
