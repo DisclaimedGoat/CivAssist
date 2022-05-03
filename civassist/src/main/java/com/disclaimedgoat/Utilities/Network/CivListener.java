@@ -11,10 +11,6 @@ public class CivListener implements ServerAction {
     public void perform(PrintWriter out, BufferedReader in) throws IOException {
         System.out.println("Getting a call");
 
-        String line = in.readLine();
-        while(line != null && !line.equals("\r")) {
-            System.out.println(line);
-            line = in.readLine();
-        }
+        in.lines().forEach(System.out::println);
     }
 }
