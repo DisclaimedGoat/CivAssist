@@ -42,6 +42,8 @@ public class ServerListener {
 
                 out.close();
                 in.close();
+
+                socket.close();
                 Logger.globalLogF("socket", "Received socket data from %s.", socket.getRemoteSocketAddress().toString());
             } catch (IOException e) {
                 Logger.globalErr("socket", "Encountered exception in server listener!", e.getLocalizedMessage());
