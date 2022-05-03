@@ -39,6 +39,9 @@ public class ServerListener {
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
                 action.perform(out, in);
+
+                out.close();
+                in.close();
                 Logger.globalLogF("socket", "Received socket data from %s.", socket.getRemoteSocketAddress().toString());
             } catch (IOException e) {
                 Logger.globalErr("socket", "Encountered exception in server listener!", e.getLocalizedMessage());
