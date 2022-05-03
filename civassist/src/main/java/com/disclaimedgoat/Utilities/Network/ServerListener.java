@@ -34,6 +34,7 @@ public class ServerListener {
             try {
                 System.out.println("Starting to listen");
                 Socket socket = serverSocket.accept();
+                socket.setKeepAlive(false);
 
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
