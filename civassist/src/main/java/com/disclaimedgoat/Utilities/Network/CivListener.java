@@ -1,5 +1,6 @@
 package com.disclaimedgoat.Utilities.Network;
 
+import com.disclaimedgoat.Utilities.DataManagement.Logger;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.eclipse.jetty.server.Request;
@@ -11,8 +12,9 @@ public class CivListener extends AbstractHandler {
     public void handle(String target, Request request, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 
         request.setHandled(true);
-
-        System.out.println(httpServletRequest.toString());
         httpServletResponse.setStatus(200);
+        Logger.globalLogF("server", "Receiving request from '%s'", request.getRemoteAddr());
+
+        System.out.println(httpServletResponse.getContentType());
     }
 }
