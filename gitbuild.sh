@@ -1,7 +1,7 @@
 echo "==========================="
 echo "KILLING PREVIOUS BOT BUILDS"
 echo "==========================="
-kill `jps -l | grep "club-1.0-jar-with-dependencies.jar" | cut -d " " -f 1`
+sh ./killbot.sh
 
 echo "=========================="
 echo "PULLING LATEST GIT VERSION"
