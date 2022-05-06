@@ -23,7 +23,13 @@ public class CivListener extends AbstractHandler {
 
         try {
             BufferedReader out = httpServletRequest.getReader();
-            JsonObject jsonObject = JsonParser.parseReader(out).getAsJsonObject();
+
+            StringBuilder stringBuilder = new StringBuilder();
+            out.lines().forEach(stringBuilder::append);
+            String content = stringBuilder.toString();
+            System.out.println(content);
+
+            JsonObject jsonObject = JsonParser.parseString(content).getAsJsonObject();
             System.out.println(jsonObject.getAsString());
 
             String gameName = jsonObject.get("value1").getAsString();
