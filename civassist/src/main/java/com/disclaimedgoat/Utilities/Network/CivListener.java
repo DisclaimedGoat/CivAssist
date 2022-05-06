@@ -29,14 +29,20 @@ public class CivListener extends AbstractHandler {
             String content = stringBuilder.toString();
             System.out.println(content);
 
-            JsonElement jsonObject = JsonParser.parseString(content);
-            System.out.println(jsonObject.getAsString());
+            JsonElement jsonElement = JsonParser.parseString(content);
+            if(!jsonElement.isJsonObject()) {
+                System.out.println("Not a valid json object!");
+                return;
+            }
+            JsonObject jsonObject = jsonElement.getAsJsonObject();
 
-//            String gameName = jsonObject.get("value1").getAsString();
-//            String playerName = jsonObject.get("value2").getAsString();
-//            String turnNumber = jsonObject.get("value3").getAsString();
+//            System.out.println(jsonObject.toString());
 
-//            System.out.printf("It's %s's turn for game %s. Turn number: %s%n", playerName, gameName, turnNumber);
+            String gameName = jsonObject.get("value1").getAsString();
+            String playerName = jsonObject.get("value2").getAsString();
+            String turnNumber = jsonObject.get("value3").getAsString();
+
+            System.out.printf("It's %s's turn for game %s. Turn number: %s%n", playerName, gameName, turnNumber);
 
         } catch (IOException e) {
             e.printStackTrace();
