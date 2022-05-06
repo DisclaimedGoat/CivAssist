@@ -6,6 +6,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+
 public class CivListener extends AbstractHandler {
 
     @Override
@@ -15,6 +18,13 @@ public class CivListener extends AbstractHandler {
         httpServletResponse.setStatus(200);
         Logger.globalLogF("server", "Receiving request from '%s'", request.getRemoteAddr());
 
-        System.out.println(httpServletResponse.getContentType());
+        try {
+            BufferedReader out = httpServletRequest.getReader();
+
+            out.lines().forEach(System.out::println);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
