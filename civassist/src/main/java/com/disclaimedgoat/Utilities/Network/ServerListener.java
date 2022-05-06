@@ -1,62 +1,36 @@
 package com.disclaimedgoat.Utilities.Network;
 
-import com.disclaimedgoat.Utilities.DataManagement.Logger;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.ServerConnector;
+import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.eclipse.jetty.server.handler.ContextHandler;
+import org.eclipse.jetty.server.handler.ContextHandlerCollection;
+import org.eclipse.jetty.util.thread.QueuedThreadPool;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
-
-//Disclaimer! Most of this code was inspired by:
-//https://www.baeldung.com/a-guide-to-java-sockets
-// Check out the website and see some great guides they offer
 
 public class ServerListener {
 
-    private final int port;
-    private final Thread thread;
-    private ServerSocket serverSocket;
+    private final static QueuedThreadPool threadPool = new QueuedThreadPool();
+    private final Server server = new Server(threadPool);
+    private final ContextHandlerCollection contextCollection = new ContextHandlerCollection();
 
-    public ServerListener(int port, ServerAction action) {
-        this.port = port;
-        this.thread = new Thread(() -> perform(action));
+    public ServerListener(int port) {
+        ServerConnector connector = new ServerConnector(server);
+        connector.setPort(port);
+        server.addConnector(connector);
+
+        server.setHandler(contextCollection);
     }
 
-    private void perform(ServerAction action) {
-        try { serverSocket = new ServerSocket(port); }
-        catch (IOException e) {
-            Logger.globalErr("socket", "Encountered exception in server listener when trying to build socket!", e.getLocalizedMessage());
-        }
+    public ServerListener pushHandler(String target, AbstractHandler handler) {
+        ContextHandler contextHandler = new ContextHandler(target);
+        contextHandler.setHandler(handler);
 
-        while(true) {
-            try {
-                System.out.println("Starting to listen");
-                Socket socket = serverSocket.accept();
-                socket.setKeepAlive(false);
+        contextCollection.addHandler(contextHandler);
 
-                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-                action.perform(out, in);
-
-                out.close();
-                in.close();
-
-                socket.close();
-                Logger.globalLogF("socket", "Received socket data from %s.", socket.getRemoteSocketAddress().toString());
-            } catch (IOException e) {
-                Logger.globalErr("socket", "Encountered exception in server listener!", e.getLocalizedMessage());
-            }
-        }
+        return this;
     }
 
-    public void start() { thread.start(); }
-    public void stop() { thread.interrupt(); }
-    public boolean isListening() { return thread.isAlive(); }
-
-    public interface ServerAction {
-        void perform(PrintWriter out, BufferedReader in) throws IOException;
-    }
+    public void start() throws Exception { server.start(); }
+    public void stop() throws Exception { server.stop(); }
 }

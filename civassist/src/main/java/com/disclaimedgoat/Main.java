@@ -39,8 +39,14 @@ public final class Main {
         setupListeners();
 
         //Setup the listening part of the server
-        serverListener = new ServerListener(Environment.getServerPort(), new CivListener());
-        serverListener.start();
+        serverListener = new ServerListener(Environment.getServerPort());
+        try {
+            serverListener
+                    .pushHandler("/", new CivListener())
+                    .start();
+        } catch(Exception e) {
+            Logger.globalLog("server", "The server listener encountered an error!", e.getMessage());
+        }
 
 //        try { System.out.println(HTTP.makeRequest("http://localhost:8080")); }
 //        catch(IOException ignored) { }

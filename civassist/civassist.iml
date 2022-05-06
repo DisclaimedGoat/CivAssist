@@ -31,5 +31,10 @@
     <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-core:4.1.1" level="project" />
     <orderEntry type="library" name="Maven: com.github.azzerial.slash-commands:api:1.1" level="project" />
     <orderEntry type="library" name="Maven: io.github.cdimascio:dotenv-java:2.2.3" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-server:11.0.9" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.jetty.toolchain:jetty-jakarta-servlet-api:5.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-http:11.0.9" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-util:11.0.9" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-io:11.0.9" level="project" />
   </component>
 </module>

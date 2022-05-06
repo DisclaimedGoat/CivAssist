@@ -1,17 +1,18 @@
 package com.disclaimedgoat.Utilities.Network;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.handler.AbstractHandler;
 
-import static com.disclaimedgoat.Utilities.Network.ServerListener.ServerAction;
+public class CivListener extends AbstractHandler {
 
-public class CivListener implements ServerAction {
     @Override
-    public void perform(PrintWriter out, BufferedReader in) throws IOException {
-        System.out.println("Getting a call");
+    public void handle(String target, Request request, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 
-        in.lines().forEach(System.out::println);
-        out.write("request received!");
+        request.setHandled(true);
+
+        System.out.println(httpServletRequest.toString());
+        httpServletResponse.setStatus(200);
     }
 }
