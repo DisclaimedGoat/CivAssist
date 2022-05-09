@@ -1,11 +1,13 @@
 package com.disclaimedgoat.Utilities.Network;
 
+import com.disclaimedgoat.Integrations.Data.SessionData;
 import com.disclaimedgoat.Utilities.DataManagement.Logger;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import net.azzerial.slash.util.Session;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
@@ -29,20 +31,23 @@ public class CivListener extends AbstractHandler {
             String content = stringBuilder.toString();
             System.out.println(content);
 
-            JsonElement jsonElement = JsonParser.parseString(content);
-            if(!jsonElement.isJsonObject()) {
-                System.out.println("Not a valid json object!");
-                return;
-            }
-            JsonObject jsonObject = jsonElement.getAsJsonObject();
+//            JsonElement jsonElement = JsonParser.parseString(content);
+//            if(!jsonElement.isJsonObject()) {
+//                System.out.println("Not a valid json object!");
+//                return;
+//            }
+//            JsonObject jsonObject = jsonElement.getAsJsonObject();
+//
+//            String gameName = jsonObject.get("value1").getAsString();
+//            String playerName = jsonObject.get("value2").getAsString();
+//            String turnNumber = jsonObject.get("value3").getAsString();
+//
+//            SessionData sessionData = SessionData.findFirst(gameName);
+//            if(gameName == null) {
+//                System.out.println("Unable to find session name in database. Skipping");
+//                return;
+//            }
 
-//            System.out.println(jsonObject.toString());
-
-            String gameName = jsonObject.get("value1").getAsString();
-            String playerName = jsonObject.get("value2").getAsString();
-            String turnNumber = jsonObject.get("value3").getAsString();
-
-            System.out.printf("It's %s's turn for game %s. Turn number: %s%n", playerName, gameName, turnNumber);
 
         } catch (IOException e) {
             e.printStackTrace();

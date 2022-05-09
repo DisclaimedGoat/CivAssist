@@ -78,11 +78,19 @@ public class SessionData {
         return getDocumentBySessionName(guild, sessionName) == null;
     }
 
+    public static SessionData findFirst(String sessionName) {
+        Document doc = Database.findFirstThroughServerCollections("sessionName", sessionName);
+        if(doc == null) return null;
+        return new SessionData(null, doc);
+    }
+
     public static boolean pushNew(SessionData sessionData) {
+        if(sessionData.illegalEdit()) return false;
+
         Document document = getDocumentBySessionName(sessionData.guild, sessionData.sessionName);
         if(document != null) return false;
 
-        Database.insertNewDocument(sessionData.guild, sessionData);
+        Database.insertNewGuildDocument(sessionData.guild, sessionData);
         return true;
     }
 
@@ -93,10 +101,12 @@ public class SessionData {
     { return Database.findFirstFromGuild(guild, "channelId", channelId); }
 
     private <T> void setValue(String fieldName, T from, T to) {
+        if(illegalEdit()) return;
         Database.updateOneFromGuild(guild, fieldName, from, to);
     }
 
     private <T> void setArrayFromList(ArrayList<T> list, String fieldName) {
+        if(illegalEdit()) return;
         Database.updateOneFromGuildToNewValue(guild, "sessionName", sessionName, fieldName, list);
     }
 
@@ -187,5 +197,13 @@ public class SessionData {
 
     public int getNumberPlayers() {
         return joinedUsers.size();
+    }
+
+    private boolean illegalEdit() {
+        if(guild == null) {
+            return true;
+        }
+
+        return false;
     }
 }

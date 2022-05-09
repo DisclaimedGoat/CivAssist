@@ -72,11 +72,11 @@ public class Database {
         return serversDatabase.getCollection(guild.getId());
     }
 
-    public static <T> Document findFirstFromGuild(Guild guild, String field, T value) {
-        return getCollectionFromGuild(guild).find(eq(field, value)).first();
+    public static Document findFirstFromGuild(Guild guild, String field, Object value) {
+        return findFirst(getCollectionFromGuild(guild), field, value);
     }
 
-    public static <T> void insertNewDocument(Guild guild, T obj) {
+    public static void insertNewGuildDocument(Guild guild, Object obj) {
         getCollectionFromGuild(guild).insertOne(new Document(ClassUtils.mapClass(obj)));
     }
 
@@ -86,12 +86,28 @@ public class Database {
         getCollectionFromGuild(guild).deleteOne(eq(fieldName, value));
     }
 
+    public static Document findFirstThroughServerCollections(String field, Object value) {
+
+        for(String collectionName : serversDatabase.listCollectionNames()) {
+            MongoCollection<Document> collection = serversDatabase.getCollection(collectionName);
+
+            Document potentialDoc = findFirst(collection, field, value);
+            if(potentialDoc != null) return potentialDoc;
+        }
+
+        return null;
+    }
+
     public static <T> void updateOneFromGuild(Guild guild, String fieldName, T from, T to) {
         serversDatabase.getCollection(guild.getId()).updateOne(eq(fieldName, from), set(fieldName, to));
     }
 
     public static <T> void updateOneFromGuildToNewValue(Guild guild, String filterName, T filterValue, String fieldName, T value) {
         serversDatabase.getCollection(guild.getId()).updateOne(eq(filterName, filterValue), set(fieldName, value));
+    }
+
+    private static Document findFirst(MongoCollection<Document> collection, String fieldName, Object value) {
+        return collection.find(eq(fieldName, value)).first();
     }
 
     public static void pushUser(UserData user, boolean create) {
